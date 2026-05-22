@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import AboutMe from './components/AboutMe';
+import WhyHireMe from './components/WhyHireMe';
+import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
+import Achievements from './components/Achievements';
+import AboutMe from './components/AboutMe';
+import Testimonials from './components/Testimonials';
+import GitHubStats from './components/GitHubStats';
+import Blog from './components/Blog';
 import Education from './components/Education';
 import Certificates from './components/Certificates';
-import GitHubStats from './components/GitHubStats';
-import Projects from './components/Projects';
-import Blog from './components/Blog';
-import Testimonials from './components/Testimonials';
-import WhyHireMe from './components/WhyHireMe';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
 import BackToTop from './components/BackToTop';
+import CustomCursor from './components/CustomCursor';
 import CVModal from './components/CVModal';
 import { CVModalProvider } from './context/CVModalContext';
 
@@ -28,21 +30,23 @@ export default function App() {
 
   return (
     <CVModalProvider>
+      <CustomCursor />
       <SplashScreen isVisible={showSplash} />
       <div className="min-h-screen bg-slate-950 text-white">
         <Navbar />
         <main>
           <Hero />
-          <AboutMe />
+          <WhyHireMe />
+          <Projects />
           <Skills />
           <Experience />
+          <Achievements />
+          <AboutMe />
+          <Testimonials />
+          <GitHubStats />
+          <Blog />
           <Education />
           <Certificates />
-          <GitHubStats />
-          <Projects />
-          <Blog />
-          <Testimonials />
-          <WhyHireMe />
           <Contact />
         </main>
         <Footer />

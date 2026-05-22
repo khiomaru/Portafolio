@@ -229,6 +229,15 @@
       "tags": ["NestJS", "JWT", "Auth", "Roles", "TypeScript"]
     }
   },
+  "achievements": {
+    "title": "Achievements",
+    "items": [
+      { "value": "2+", "label": "years building software", "desc": "From academic projects to a production e-commerce system for real users at Afer Bolivia.", "icon": "code" },
+      { "value": "6+", "label": "completed projects", "desc": "Full-stack systems with Angular, NestJS, Vue, C#. REST APIs, JWT auth, roles, complete CRUDs.", "icon": "layers" },
+      { "value": "1", "label": "system nearing production", "desc": "Home appliance e-commerce replacing a legacy system. Multidisciplinary teamwork.", "icon": "rocket" },
+      { "value": "Last", "label": "semester of Computer Engineering", "desc": "About to graduate from USFX. Formal internship as Directed Work at Afer Bolivia.", "icon": "users" }
+    ]
+  },
   "contact": {
     "title": "Contact",
     "letsTalk": "Let's Talk",

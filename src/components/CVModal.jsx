@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCVModal } from '../context/CVModalContext';
+import { useCVModal } from '../context/useCVModal';
 
 export default function CVModal() {
   const { t } = useTranslation();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
-import { useCVModal } from '../context/CVModalContext';
+import { useCVModal } from '../context/useCVModal';
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();

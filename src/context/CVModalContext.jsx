@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 const CVModalContext = createContext();
 
@@ -15,4 +15,4 @@ export function CVModalProvider({ children }) {
   );
 }
 
-export const useCVModal = () => useContext(CVModalContext);
+export default CVModalContext;

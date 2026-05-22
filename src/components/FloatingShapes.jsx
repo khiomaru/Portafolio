@@ -12,13 +12,13 @@ function ShapeGroup() {
     }
   });
 
-  const shapes = useMemo(() => [
+  const shapes = [
     { position: [-3.5, 0.5, -2], scale: 1.2, color: '#06b6d4', type: 'torus' },
     { position: [3.8, -0.8, -1.5], scale: 0.9, color: '#8b5cf6', type: 'octahedron' },
     { position: [-2, -1.5, 0], scale: 0.6, color: '#06b6d4', type: 'icosahedron' },
     { position: [2.5, 1.2, -3], scale: 0.7, color: '#8b5cf6', type: 'dodecahedron' },
     { position: [0, 2, -4], scale: 0.5, color: '#ec4899', type: 'torusKnot' },
-  ], []);
+  ];
 
   return (
     <group ref={groupRef}>
@@ -49,10 +49,15 @@ function FloatingParticles() {
   const count = 200;
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
+    let seed = 42;
+    const pseudoRandom = () => {
+      seed = (seed * 16807) % 2147483647;
+      return (seed - 1) / 2147483646;
+    };
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 20;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5;
+      pos[i * 3] = (pseudoRandom() - 0.5) * 20;
+      pos[i * 3 + 1] = (pseudoRandom() - 0.5) * 20;
+      pos[i * 3 + 2] = (pseudoRandom() - 0.5) * 10 - 5;
     }
     return pos;
   }, []);

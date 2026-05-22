@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { useCVModal } from '../context/CVModalContext';
+import { useCVModal } from '../context/useCVModal';
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -26,8 +26,10 @@ export default function Hero() {
     } else if (isDeleting && displayText.length > 0) {
       timeout = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 40);
     } else if (isDeleting && displayText.length === 0) {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }, 50);
     }
 
     return () => clearTimeout(timeout);
