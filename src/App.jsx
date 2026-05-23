@@ -7,9 +7,6 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Achievements from './components/Achievements';
 import AboutMe from './components/AboutMe';
-import Testimonials from './components/Testimonials';
-import GitHubStats from './components/GitHubStats';
-import Blog from './components/Blog';
 import Education from './components/Education';
 import Certificates from './components/Certificates';
 import Contact from './components/Contact';
@@ -43,7 +40,6 @@ export default function App() {
           <Achievements />
           <AboutMe />
           <Testimonials />
-          <GitHubStats />
           <Blog />
           <Education />
           <Certificates />
