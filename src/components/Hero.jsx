@@ -152,7 +152,7 @@ export default function Hero() {
           <a
             href="https://github.com/khiomaru"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             className="group relative px-8 py-3.5 bg-slate-800/80 border border-slate-700 text-slate-200 font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/50 hover:bg-slate-700/80 hover:scale-105 backdrop-blur-sm"
           >
             <span className="flex items-center gap-2">
@@ -164,7 +164,7 @@ export default function Hero() {
           <a
             href="https://www.linkedin.com/in/khiomaru"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             className="group relative px-8 py-3.5 bg-slate-800/80 border border-slate-700 text-slate-200 font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:border-violet-500/50 hover:bg-slate-700/80 hover:scale-105 backdrop-blur-sm"
           >
             <span className="flex items-center gap-2">
