@@ -2,9 +2,9 @@
 
 **Full Stack Developer** | Angular + NestJS + TypeScript + PostgreSQL
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-khiomaru.dev-06b6d4?style=for-the-badge)]([https://khiomaru.dev](https://khiomaru.vercel.app))
+[![Portfolio](https://img.shields.io/badge/Portfolio-khiomaru.vercel.app-06b6d4?style=for-the-badge)](https://khiomaru.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-khiomaru-8b5cf6?style=for-the-badge)](https://linkedin.com/in/khiomaru)
-[![GitHub](https://img.shields.io/badge/GitHub-khiomaru-0f172a?style=for-the-badge)](https://github.com/khiomaru)
+[![GitHub](https://img.shields.io/badge/GitHub-Manuel--Adolfo--Soto-0f172a?style=for-the-badge)](https://github.com/Manuel-Adolfo-Soto)
 
 ---
 
@@ -23,8 +23,7 @@ Portafolio profesional personal construido con **React 19 + Vite + Tailwind CSS 
 | 🎨 Animaciones | Framer Motion + Three.js 3D |
 | 📱 Responsive | Mobile-first, todos los dispositivos |
 | ⚡ Performance | Vite + lazy loading + optimizado |
-| 📊 GitHub integrado | Stats, activity graph, lenguajes |
-| 📝 Blog técnico | Artículo sobre JWT Auth con roles |
+| 🎯 SEO | Meta tags, Open Graph, JSON-LD |
 | 🎯 SEO | Meta tags, Open Graph, JSON-LD |
 
 ---
@@ -90,7 +89,7 @@ src/
 
 ## 🌐 Dominio
 
-[**khiomaru.dev**](https://khiomaru.dev) — desplegado en Vercel con dominio personalizado.
+[**khiomaru.vercel.app**](https://khiomaru.vercel.app) — desplegado en Vercel.
 
 ---
 
@@ -98,7 +97,7 @@ src/
 
 - Email: sotomanueladolfo1@gmail.com
 - LinkedIn: [linkedin.com/in/khiomaru](https://linkedin.com/in/khiomaru)
-- GitHub: [github.com/khiomaru](https://github.com/khiomaru)
+- GitHub: [github.com/Manuel-Adolfo-Soto](https://github.com/Manuel-Adolfo-Soto)
 
 ---
 
