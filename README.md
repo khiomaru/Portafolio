@@ -2,7 +2,7 @@
 
 **Full Stack Developer** | Angular + NestJS + TypeScript + PostgreSQL
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-khiomaru.dev-06b6d4?style=for-the-badge)](https://khiomaru.dev)
+[![Portfolio](https://img.shields.io/badge/Portfolio-khiomaru.dev-06b6d4?style=for-the-badge)]([https://khiomaru.dev](https://khiomaru.vercel.app))
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-khiomaru-8b5cf6?style=for-the-badge)](https://linkedin.com/in/khiomaru)
 [![GitHub](https://img.shields.io/badge/GitHub-khiomaru-0f172a?style=for-the-badge)](https://github.com/khiomaru)
 
