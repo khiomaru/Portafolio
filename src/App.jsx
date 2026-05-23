@@ -9,11 +9,11 @@ import AboutMe from './components/AboutMe';
 import Education from './components/Education';
 import Certificates from './components/Certificates';
 import WhyHireMe from './components/WhyHireMe';
-import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
 import BackToTop from './components/BackToTop';
+import DotNav from './components/DotNav';
 import CVModal from './components/CVModal';
 import { CVModalProvider } from './context/CVModalContext';
 
@@ -21,7 +21,7 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 1000);
+    const timer = setTimeout(() => setShowSplash(false), 300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -30,6 +30,7 @@ export default function App() {
       <SplashScreen isVisible={showSplash} />
       <div className="min-h-screen bg-slate-950 text-white">
         <Navbar />
+        <DotNav />
         <main>
           <Hero />
           <Experience />
@@ -40,7 +41,6 @@ export default function App() {
           <Education />
           <Certificates />
           <WhyHireMe />
-          <Blog />
           <Contact />
         </main>
         <Footer />

@@ -19,12 +19,17 @@ export default function Hero() {
     const currentRole = roles[roleIndex];
     let timeout;
 
+    if (displayText === '' && roleIndex === 0) {
+      setDisplayText(currentRole);
+      return;
+    }
+
     if (!isDeleting && displayText.length < currentRole.length) {
-      timeout = setTimeout(() => setDisplayText(currentRole.slice(0, displayText.length + 1)), 80);
+      timeout = setTimeout(() => setDisplayText(currentRole.slice(0, displayText.length + 1)), 40);
     } else if (!isDeleting && displayText.length === currentRole.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
+      timeout = setTimeout(() => setIsDeleting(true), 1200);
     } else if (isDeleting && displayText.length > 0) {
-      timeout = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 40);
+      timeout = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 20);
     } else if (isDeleting && displayText.length === 0) {
       timeout = setTimeout(() => {
         setIsDeleting(false);

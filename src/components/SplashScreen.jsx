@@ -11,9 +11,9 @@ export default function SplashScreen({ isVisible }) {
           className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950"
         >
           <motion.p
-            initial={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className="text-5xl font-bold font-mono"
           >
             <span className="text-gradient">&lt;k</span>

@@ -111,6 +111,8 @@
         "description": "E-commerce de electrodomésticos con sistema completo de tienda online. Incluye autenticación con roles (admin/usuario/cliente), CRUD de productos e inventarios, gestión de pedidos, carrito de compras, panel administrador con reportes y módulo de ventas. Proyecto desarrollado para usuarios reales, próximo a despliegue. Reemplaza y mejora un sistema previo existente.",
         "status": "En desarrollo (próximo a deploy)",
         "category": "E-commerce / Sistema comercial",
+        "problem": "El sistema legacy existente no escalaba, carecía de autenticación por roles y límite de usuarios simultáneos, lo que afectaba la operación diaria de la empresa.",
+        "result": "Sistema moderno con Angular + NestJS que reemplaza el anterior, soportando múltiples roles (admin, usuario, cliente), carrito, inventarios y reportes en tiempo real. Próximo a deploy en producción.",
         "details": [
           "Login y autenticación con roles",
           "CRUD completo de productos e inventarios",

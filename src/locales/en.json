@@ -111,6 +111,8 @@
         "description": "Home appliance e-commerce with a complete online store system. Includes role-based authentication (admin/user/client), product and inventory CRUD, order management, shopping cart, admin panel with reports and sales module. Built for real users, nearing deployment. Replaces and improves a previous existing system.",
         "status": "In development (nearing deploy)",
         "category": "E-commerce / Commercial System",
+        "problem": "The legacy system didn't scale, lacked role-based authentication and had simultaneous user limits, affecting daily business operations.",
+        "result": "Modern Angular + NestJS system replacing the old one, supporting multiple roles (admin, user, client), cart, inventory and real-time reports. Nearing production deployment.",
         "details": [
           "Login and role-based authentication",
           "Complete product and inventory CRUD",

@@ -11,47 +11,6 @@ const categories = [
   { key: 'networking', label: 'Redes', color: '#f43f5e' },
 ];
 
-function SkillRing({ name, level, index, color }) {
-  const { ref, isVisible } = useInView(0.2);
-  const radius = 34;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (level / 100) * circumference;
-
-  return (
-    <div ref={ref} className="flex flex-col items-center gap-2 group">
-      <div className="relative w-20 h-20">
-        <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-          <circle cx="40" cy="40" r={radius} fill="none" stroke="rgba(51,65,85,0.5)" strokeWidth="4" />
-          <motion.circle
-            cx="40"
-            cy="40"
-            r={radius}
-            fill="none"
-            stroke={color}
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            initial={{ strokeDashoffset: circumference }}
-            animate={isVisible ? { strokeDashoffset: offset } : { strokeDashoffset: circumference }}
-            transition={{ duration: 1.2, delay: index * 0.1, ease: 'easeOut' }}
-          />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.span
-            className="text-sm font-bold font-mono text-white"
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.5 + index * 0.1 }}
-          >
-            {level}%
-          </motion.span>
-        </div>
-      </div>
-      <span className="text-xs text-slate-400 group-hover:text-white transition-colors">{name}</span>
-    </div>
-  );
-}
-
 export default function Skills() {
   const { t } = useTranslation();
   const { ref, isVisible } = useInView(0.1);
@@ -88,13 +47,18 @@ export default function Skills() {
           {categories.map((cat) => (
             <motion.div key={cat.key} variants={item}>
               <div className="glass rounded-xl p-6 card-hover h-full">
-                <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
+                <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: cat.color }} />
                   {t(`skills.categories.${cat.key}`)}
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {skills[cat.key].map((skill, i) => (
-                    <SkillRing key={skill.name} {...skill} index={i} color={cat.color} />
+                <div className="flex flex-wrap gap-2">
+                  {skills[cat.key].map((skill) => (
+                    <span
+                      key={skill.name}
+                      className="px-3 py-1.5 text-xs font-mono text-slate-300 bg-slate-800/60 rounded-lg border border-slate-700/50 hover:border-cyan-500/30 hover:text-cyan-300 transition-all"
+                    >
+                      {skill.name}
+                    </span>
                   ))}
                 </div>
               </div>
