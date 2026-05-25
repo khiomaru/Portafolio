@@ -40,13 +40,19 @@ export default function Certificates() {
           >
             <button onClick={() => setPreview(cert.link)} className="w-full text-left glass rounded-xl overflow-hidden card-hover border border-slate-700/50">
               <div className="flex flex-col sm:flex-row">
-                <div className="sm:w-48 h-48 sm:h-auto bg-slate-800 shrink-0">
-                  <img
-                    src={cert.link}
-                    alt={cert.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+                <div className="sm:w-48 h-48 sm:h-auto bg-slate-800 shrink-0 flex items-center justify-center">
+                  {cert.link.endsWith('.pdf') ? (
+                    <svg className="w-12 h-12 text-cyan-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                  ) : (
+                    <img
+                      src={cert.link}
+                      alt={cert.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
                 </div>
                 <div className="p-6 flex flex-col justify-center">
                   <h3 className="text-lg font-semibold text-white mb-1">{cert.name}</h3>
@@ -83,17 +89,25 @@ export default function Certificates() {
               >
                 Cerrar ✕
               </button>
-              <img
-                src={preview}
-                alt="Certificado"
-                className="w-full h-auto rounded-xl shadow-2xl"
-              />
+              {preview.endsWith('.pdf') ? (
+                <embed
+                  src={preview}
+                  type="application/pdf"
+                  className="w-full h-[80vh] rounded-xl shadow-2xl"
+                />
+              ) : (
+                <img
+                  src={preview}
+                  alt="Certificado"
+                  className="w-full h-auto rounded-xl shadow-2xl"
+                />
+              )}
               <a
                 href={preview}
                 download
                 className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-cyan-500 to-violet-500 rounded-lg hover:from-cyan-400 hover:to-violet-400 transition-all"
               >
-                Descargar imagen
+                {preview.endsWith('.pdf') ? 'Descargar PDF' : 'Descargar imagen'}
               </a>
             </motion.div>
           </motion.div>
