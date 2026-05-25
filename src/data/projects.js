@@ -147,6 +147,14 @@ export const certificates = [
     pending: false,
   },
   {
+    name: "Certificado de Desarrollo Web Completo",
+    issuer: "Plataforma de formación online",
+    date: "2026",
+    link: "/images/desarrollo-certificado.png",
+    description: "Formación complementaria en desarrollo web full stack.",
+    pending: false,
+  },
+  {
     name: "Próximamente — Cursos y certificaciones",
     issuer: "",
     date: "",
