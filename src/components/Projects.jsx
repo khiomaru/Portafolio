@@ -18,6 +18,7 @@ function ProjectCard({ project, index, featured }) {
   const { t } = useTranslation();
   const { ref, isVisible } = useInView(0.1);
   const [imgIndex, setImgIndex] = useState(0);
+  const [gridImgIndex, setGridImgIndex] = useState(0);
 
   const p = t(`projects.items.${project.tKey}`, { returnObjects: true });
 
@@ -181,13 +182,44 @@ function ProjectCard({ project, index, featured }) {
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
     >
       <div className="glass rounded-xl overflow-hidden border border-slate-700/50 h-full flex flex-col">
-        <div className={`h-32 bg-gradient-to-br ${gradient} flex items-center justify-center border-b border-slate-700/50 relative overflow-hidden`}>
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `radial-gradient(circle at 30% 50%, rgba(6,182,212,0.1) 0%, transparent 50%)`,
-          }} />
-          <span className="relative text-3xl font-bold text-gradient opacity-30">
-            {String(index).padStart(2, '0')}
-          </span>
+        <div className={`h-32 bg-gradient-to-br ${gradient} flex items-center justify-center border-b border-slate-700/50 relative overflow-hidden group`}>
+          {project.images && project.images.length > 0 ? (
+            <div className="w-full h-full relative">
+              <img
+                src={project.images[gridImgIndex]}
+                alt={`${p.name} screenshot`}
+                className="w-full h-full object-cover object-top absolute inset-0"
+                loading="lazy"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
+              {project.images.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setGridImgIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))}
+                    className="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-all opacity-0 group-hover:opacity-100"
+                  >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                  </button>
+                  <button
+                    onClick={() => setGridImgIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-all opacity-0 group-hover:opacity-100"
+                  >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  </button>
+                </>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className="absolute inset-0 opacity-20" style={{
+                backgroundImage: `radial-gradient(circle at 30% 50%, rgba(6,182,212,0.1) 0%, transparent 50%)`,
+              }} />
+              <span className="relative text-3xl font-bold text-gradient opacity-30">
+                {String(index).padStart(2, '0')}
+              </span>
+            </>
+          )}
         </div>
         <div className="p-5 flex-1 flex flex-col">
           <div className="flex items-center justify-between mb-2">

@@ -22,6 +22,17 @@ export const projects = [
     repoBack: "https://github.com/Manuel-Adolfo-Soto/Sis457_Farmacia_2-2025",
     year: "2025",
     completed: true,
+    images: [
+      "/images/farmacia/final_si4257_FARMACIA_page-0006.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0008.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0009.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0010.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0011.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0012.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0013.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0014.jpg",
+      "/images/farmacia/final_si4257_FARMACIA_page-0015.jpg",
+    ],
   },
   {
     id: 3,
