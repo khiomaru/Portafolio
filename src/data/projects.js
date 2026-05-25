@@ -147,11 +147,11 @@ export const certificates = [
     pending: false,
   },
   {
-    name: "Certificado de Participación - Dev Fest Sucre",
-    issuer: "Dev Fest Sucre · Google Developer Group",
-    date: "Mayo 2025",
-    link: "/images/desarrollo-certificado.png",
-    description: "Certificado por destacada participación en el evento de desarrollo celebrado el 30 de mayo de 2025.",
+    name: "Certificado de Participación - DevFest Sucre 2024",
+    issuer: "Google Developer Groups · Women Techmakers · USFX",
+    date: "Noviembre 2024",
+    link: "/images/Manuel_Adolfo_Soto_Certificado_de_Participación_Certificate.pdf",
+    description: "Certificado por destacada participación y contribución como participante en DevFest Sucre 2024, celebrado el 16 de noviembre de 2024.",
     pending: false,
   },
   {
