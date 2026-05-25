@@ -231,6 +231,33 @@
       { "value": "Último", "label": "semestre de Ingeniería Informática", "desc": "Próximo a egresar de la USFX. Pasantía formalizada como Trabajo Dirigido en Afer Bolivia.", "icon": "users" }
     ]
   },
+  "services": {
+    "title": "Servicios",
+    "subtitle": "Construyo sistemas a medida para negocios, startups y proyectos personales. Desde APIs hasta paneles administrativos completos.",
+    "cta": "Disponible para nuevos proyectos — contáctame",
+    "items": [
+      {
+        "title": "Paneles administrativos",
+        "desc": "CRUDs completos con autenticación, roles, filtros, reportes y exportación. Angular + NestJS + PostgreSQL.",
+        "icon": "web"
+      },
+      {
+        "title": "APIs REST escalables",
+        "desc": "Backends modulares con NestJS, autenticación JWT, documentación con Swagger y base de datos relacional.",
+        "icon": "api"
+      },
+      {
+        "title": "Sistemas de inventarios",
+        "desc": "Control de stock, alertas de caducidad, historial de movimientos y módulos de ventas con reportes.",
+        "icon": "database"
+      },
+      {
+        "title": "Sistemas a medida",
+        "desc": "Cualquier idea que tengas — e-commerce, facturación, reservas, gestión. Frontend + Backend + Base de datos.",
+        "icon": "custom"
+      }
+    ]
+  },
   "contact": {
     "title": "Contacto",
     "letsTalk": "Hablemos",

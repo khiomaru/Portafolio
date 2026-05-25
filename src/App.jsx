@@ -9,6 +9,7 @@ import AboutMe from './components/AboutMe';
 import Education from './components/Education';
 import Certificates from './components/Certificates';
 import WhyHireMe from './components/WhyHireMe';
+import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SplashScreen from './components/SplashScreen';
@@ -41,6 +42,7 @@ export default function App() {
           <Education />
           <Certificates />
           <WhyHireMe />
+          <Services />
           <Contact />
         </main>
         <Footer />

@@ -231,6 +231,33 @@
       { "value": "Last", "label": "semester of Computer Engineering", "desc": "About to graduate from USFX. Formal internship as Directed Work at Afer Bolivia.", "icon": "users" }
     ]
   },
+  "services": {
+    "title": "Services",
+    "subtitle": "I build custom systems for businesses, startups and personal projects. From APIs to complete admin panels.",
+    "cta": "Available for new projects — contact me",
+    "items": [
+      {
+        "title": "Admin Panels",
+        "desc": "Complete CRUDs with authentication, roles, filters, reports and exports. Angular + NestJS + PostgreSQL.",
+        "icon": "web"
+      },
+      {
+        "title": "Scalable REST APIs",
+        "desc": "Modular backends with NestJS, JWT authentication, Swagger documentation and relational databases.",
+        "icon": "api"
+      },
+      {
+        "title": "Inventory Systems",
+        "desc": "Stock control, expiry alerts, movement history and sales modules with reports.",
+        "icon": "database"
+      },
+      {
+        "title": "Custom Systems",
+        "desc": "Any idea you have — e-commerce, billing, bookings, management. Frontend + Backend + Database.",
+        "icon": "custom"
+      }
+    ]
+  },
   "contact": {
     "title": "Contact",
     "letsTalk": "Let's Talk",
