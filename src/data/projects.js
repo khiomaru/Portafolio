@@ -41,6 +41,16 @@ export const projects = [
     repo: "https://github.com/cruzvillcamarleny1-del/Sis257_hamburgueseria",
     year: "2025",
     completed: true,
+    images: [
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234219.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234319.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234357.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234427.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234449.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234508.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234602.png",
+      "/images/hamburgueseria/Captura de pantalla 2026-05-24 234617.png",
+    ],
   },
   {
     id: 4,
