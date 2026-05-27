@@ -27,13 +27,15 @@ export default function AnimatedLogo({ href, onClick, size = 'default' }) {
   const fullText = 'hiomaru';
   const [showCursor, setShowCursor] = useState(true);
 
+  const typingSpeed = size === 'large' ? 200 : 100;
+
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
       i++;
       setTyped(fullText.slice(0, i));
       if (i >= fullText.length) clearInterval(interval);
-    }, 100);
+    }, typingSpeed);
     return () => clearInterval(interval);
   }, []);
 
@@ -71,7 +73,7 @@ export default function AnimatedLogo({ href, onClick, size = 'default' }) {
             fill="url(#k-gradient)"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            transition={{ duration: size === 'large' ? 2.5 : 1.5, ease: 'easeInOut' }}
           />
           <defs>
             <linearGradient id="k-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
