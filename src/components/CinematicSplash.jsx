@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState, useEffect } from 'react';
+import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { EffectComposer, Bloom, ChromaticAberration } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
@@ -6,7 +6,127 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const K_PATH = 'M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z';
 
-const TOTAL_DURATION = 8;
+const TOTAL_DURATION = 10;
+
+let audioCtx = null;
+let audioNodes = [];
+
+function initAudio() {
+  if (audioCtx) return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  } catch {}
+}
+
+function stopAudio() {
+  audioNodes.forEach((n) => {
+    try { n.stop(); } catch {}
+    try { n.disconnect(); } catch {}
+  });
+  audioNodes = [];
+}
+
+function playCinematicSound() {
+  initAudio();
+  if (!audioCtx) return;
+  stopAudio();
+
+  const now = audioCtx.currentTime;
+  const master = audioCtx.createGain();
+  master.gain.setValueAtTime(0.4, now);
+  master.connect(audioCtx.destination);
+
+  // — Sub bass drone —
+  const sub = audioCtx.createOscillator();
+  sub.type = 'sine';
+  sub.frequency.setValueAtTime(32, now);
+  sub.frequency.linearRampToValueAtTime(35, now + 5);
+  sub.frequency.linearRampToValueAtTime(32, now + 10);
+  const subGain = audioCtx.createGain();
+  subGain.gain.setValueAtTime(0, now);
+  subGain.gain.linearRampToValueAtTime(0.25, now + 2);
+  subGain.gain.linearRampToValueAtTime(0.2, now + 8);
+  subGain.gain.linearRampToValueAtTime(0, now + 10);
+  sub.connect(subGain).connect(master);
+  sub.start(now); sub.stop(now + 10);
+  audioNodes.push(sub);
+
+  // — Bass pad (filtered saw) —
+  const pad = audioCtx.createOscillator();
+  pad.type = 'sawtooth';
+  pad.frequency.setValueAtTime(55, now);
+  pad.frequency.linearRampToValueAtTime(65, now + 10);
+  const padFilter = audioCtx.createBiquadFilter();
+  padFilter.type = 'lowpass';
+  padFilter.frequency.setValueAtTime(100, now);
+  padFilter.frequency.exponentialRampToValueAtTime(800, now + 6);
+  padFilter.frequency.exponentialRampToValueAtTime(300, now + 10);
+  const padGain = audioCtx.createGain();
+  padGain.gain.setValueAtTime(0, now);
+  padGain.gain.linearRampToValueAtTime(0.15, now + 3);
+  padGain.gain.linearRampToValueAtTime(0.1, now + 9);
+  padGain.gain.linearRampToValueAtTime(0, now + 10);
+  pad.connect(padFilter).connect(padGain).connect(master);
+  pad.start(now); pad.stop(now + 10);
+  audioNodes.push(pad);
+
+  // — High shimmer (at reveal) —
+  const shimmer = audioCtx.createOscillator();
+  shimmer.type = 'sine';
+  shimmer.frequency.setValueAtTime(880, now);
+  shimmer.frequency.exponentialRampToValueAtTime(1760, now + 5);
+  shimmer.frequency.exponentialRampToValueAtTime(880, now + 10);
+  const shimmerGain = audioCtx.createGain();
+  shimmerGain.gain.setValueAtTime(0, now);
+  shimmerGain.gain.linearRampToValueAtTime(0, now + 4);
+  shimmerGain.gain.linearRampToValueAtTime(0.06, now + 4.5);
+  shimmerGain.gain.linearRampToValueAtTime(0.04, now + 8);
+  shimmerGain.gain.linearRampToValueAtTime(0, now + 10);
+  const shimmerFilter = audioCtx.createBiquadFilter();
+  shimmerFilter.type = 'bandpass';
+  shimmerFilter.frequency.setValueAtTime(1200, now);
+  shimmerFilter.Q.setValueAtTime(2, now);
+  shimmer.connect(shimmerFilter).connect(shimmerGain).connect(master);
+  shimmer.start(now); shimmer.stop(now + 10);
+  audioNodes.push(shimmer);
+
+  // — Reveal impact (short noise burst at ~4.5s) —
+  const bufferSize = audioCtx.sampleRate * 0.3;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+  }
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = buffer;
+  const noiseFilter = audioCtx.createBiquadFilter();
+  noiseFilter.type = 'highpass';
+  noiseFilter.frequency.setValueAtTime(2000, now);
+  const noiseGain = audioCtx.createGain();
+  noiseGain.gain.setValueAtTime(0, now);
+  noiseGain.gain.linearRampToValueAtTime(0, now + 4.3);
+  noiseGain.gain.linearRampToValueAtTime(0.08, now + 4.5);
+  noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 4.8);
+  noise.connect(noiseFilter).connect(noiseGain).connect(master);
+  noise.start(now + 4.3); noise.stop(now + 4.8);
+  audioNodes.push(noise);
+
+  // — Final chord (sustained at ~7.5s) —
+  [262, 330, 392].forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, now);
+    const oGain = audioCtx.createGain();
+    oGain.gain.setValueAtTime(0, now);
+    oGain.gain.linearRampToValueAtTime(0, now + 7.2);
+    oGain.gain.linearRampToValueAtTime(0.04 - i * 0.01, now + 7.5);
+    oGain.gain.linearRampToValueAtTime(0.02, now + 9);
+    oGain.gain.linearRampToValueAtTime(0, now + 10);
+    osc.connect(oGain).connect(master);
+    osc.start(now); osc.stop(now + 10);
+    audioNodes.push(osc);
+  });
+}
 
 function StarField({ progress }) {
   const count = 3000;
@@ -187,6 +307,7 @@ const textChars = 'khiomaru';
 export default function CinematicSplash({ isVisible, onFinish }) {
   const progressRef = useRef(0);
   const startTimeRef = useRef(null);
+  const audioStartedRef = useRef(false);
 
   const [phase, setPhase] = useState(0);
   const [typedText, setTypedText] = useState('');
@@ -197,14 +318,15 @@ export default function CinematicSplash({ isVisible, onFinish }) {
     if (!isVisible) return;
     startTimeRef.current = Date.now();
     progressRef.current = 0;
+    audioStartedRef.current = false;
 
     const phaseTimers = [
-      setTimeout(() => setPhase(1), 1500),
-      setTimeout(() => setPhase(2), 3000),
+      setTimeout(() => setPhase(1), 2000),
+      setTimeout(() => setPhase(2), 3500),
       setTimeout(() => {
         setPhase(3);
         setShowLogo(true);
-      }, 4200),
+      }, 5000),
       setTimeout(() => {
         setPhase(4);
         let i = 0;
@@ -212,17 +334,18 @@ export default function CinematicSplash({ isVisible, onFinish }) {
           i++;
           setTypedText(textChars.slice(0, i));
           if (i >= textChars.length) clearInterval(interval);
-        }, 180);
-      }, 5000),
+        }, 250);
+      }, 6000),
     ];
 
     const glitchInterval = setInterval(() => {
-      if (Date.now() - startTimeRef.current > 3500) return;
+      if (Date.now() - startTimeRef.current > 4500) return;
       setGlitchActive(true);
       setTimeout(() => setGlitchActive(false), 200);
     }, 1200);
 
     const finishTimer = setTimeout(() => {
+      stopAudio();
       onFinish?.();
     }, TOTAL_DURATION * 1000);
 
@@ -230,7 +353,21 @@ export default function CinematicSplash({ isVisible, onFinish }) {
       phaseTimers.forEach(clearTimeout);
       clearInterval(glitchInterval);
       clearTimeout(finishTimer);
+      stopAudio();
     };
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible || audioStartedRef.current) return;
+    const start = Date.now();
+    const check = setInterval(() => {
+      if (Date.now() - start > 100) {
+        audioStartedRef.current = true;
+        playCinematicSound();
+        clearInterval(check);
+      }
+    }, 50);
+    return () => clearInterval(check);
   }, [isVisible]);
 
   const elapsed = startTimeRef.current ? (Date.now() - startTimeRef.current) / 1000 : 0;
@@ -258,7 +395,7 @@ export default function CinematicSplash({ isVisible, onFinish }) {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
           className="fixed inset-0 z-[200] bg-slate-950 overflow-hidden"
         >
           {/* 3D Scene */}
@@ -329,7 +466,7 @@ export default function CinematicSplash({ isVisible, onFinish }) {
                     animate={{
                       textShadow: [
                         '0 0 20px rgba(6,182,212,0.3)',
-                        '0 0 40px rgba(6,182,212,0.6)',
+                        '0 0 50px rgba(6,182,212,0.7)',
                         '0 0 20px rgba(6,182,212,0.3)',
                       ],
                     }}
@@ -402,7 +539,7 @@ export default function CinematicSplash({ isVisible, onFinish }) {
                         style={{
                           background: 'linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899, #8b5cf6, #06b6d4)',
                           backgroundSize: '200% 100%',
-                          boxShadow: '0 0 10px rgba(6,182,212,0.5)',
+                          boxShadow: '0 0 15px rgba(6,182,212,0.6)',
                         }}
                       />
                     </div>
