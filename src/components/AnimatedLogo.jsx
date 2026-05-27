@@ -24,7 +24,7 @@ const logoVariants = {
 
 export default function AnimatedLogo({ href, onClick, size = 'default' }) {
   const [typed, setTyped] = useState('');
-  const fullText = 'hiomaru';
+  const fullText = 'khiomaru';
   const [showCursor, setShowCursor] = useState(true);
 
   const typingSpeed = size === 'large' ? 200 : 100;
