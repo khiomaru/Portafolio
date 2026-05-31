@@ -25,16 +25,16 @@ export default function Hero() {
     }
 
     if (!isDeleting && displayText.length < currentRole.length) {
-      timeout = setTimeout(() => setDisplayText(currentRole.slice(0, displayText.length + 1)), 40);
+      timeout = setTimeout(() => setDisplayText(currentRole.slice(0, displayText.length + 1)), 80);
     } else if (!isDeleting && displayText.length === currentRole.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 1200);
+      timeout = setTimeout(() => setIsDeleting(true), 2500);
     } else if (isDeleting && displayText.length > 0) {
-      timeout = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 20);
+      timeout = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 40);
     } else if (isDeleting && displayText.length === 0) {
       timeout = setTimeout(() => {
         setIsDeleting(false);
         setRoleIndex((prev) => (prev + 1) % roles.length);
-      }, 50);
+      }, 500);
     }
 
     return () => clearTimeout(timeout);
